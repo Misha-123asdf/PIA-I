@@ -83,8 +83,6 @@ Vektor nasobeni(Matrix a, Vektor b)
         return c;
 }
     
-    
-    
 double nasobeni(Vektor a, Vektor b)
 {
         double c=0;
@@ -97,7 +95,27 @@ double nasobeni(Vektor a, Vektor b)
         return c;
         
 }
+
+Vektor nasobeni(double a, Vektor b)
+{
+        Vektor c;
+        
+        map <int, double>:: iterator it=b.newmap.begin();
     
+        double pom=0;
+    
+        for(int j=0; it!=b.newmap.end(); it++,j++)
+        {
+        pom=a*(it->second);
+        c.newmap[it->first]=pom;
+        }    
+        
+    
+        return c;
+        
+}
+
+
 Vektor rozdil(Vektor a, Vektor b)
 {
         Vektor c;
@@ -132,12 +150,53 @@ Vektor rozdil(Vektor a, Vektor b)
         
         return c;
 }
+Vektor soucet(Vektor a, Vektor b)
+{
+        Vektor c;
+        
+        
+        map <int, double>:: iterator it1=a.newmap.begin();
+        map <int, double>:: iterator it2=b.newmap.begin();
+        
+        vector <double> pom; //pomocny vektor prvku ktere se zucastnili operace
+        double p; //pomocny prvek pro rozdil
+  
+        for(int j=0; it1!=a.newmap.end(); it1++,j++)
+        {
+            
+        p=(it1->second)+b.newmap[it1->first];
+        c.newmap[it1->first]=p;
+        
+        pom.push_back(it1->first);
+        
+        }    
+        
+        double key=0;    
+        for(int j=0; it2!=b.newmap.end(); it2++,j++)
+        {
+    
+        key=it2->first;
+            if (find(pom.begin(), pom.end(), key) != pom.end()) {}
+            else {c.newmap[it2->first]=it2->second;}    
+    
+        }    
+
+        
+        return c;
+}
 
 int main() {
     
+    Matrix A;
+    Vektor r,x0,p,z,x,b;
+    double alfa,beta,lrr,rr;
+    
+    int n=9;
+    /*
     Matrix m;
     m.set();
-   // m.printed();
+    m.printed();
+    
     Vektor v;
     v.set();
     v.printed();
@@ -146,32 +205,44 @@ int main() {
     c=nasobeni(m,v);
     c.printed();
     
+    Vektor d;
+    d=soucet(c,v);
+    d.printed();
+    
     double f;
     f=nasobeni(c,v);
     cout<<f<<endl;
     
-    
-    /*
-    vector <double> vek={1};
-    cout<<vek[0];
-    vek.push_back(120);
-    cout<<vek[1]<<endl;
-    
-    
-    double key=120;
-    if (find(vek.begin(), vek.end(), key) != vek.end()) {
-        cout << "Element found";
-    }
-    else {
-        cout << "Element not found";
-    }
+    Vektor u;
+    u=nasobeni(8,d);
+    u.printed();
     */
     
-    Vektor k;
-    k=rozdil(v,c);
-    k.printed();
     
     
+  
+    r=rozdil(b,nasobeni(A,x0));
+    lrr=nasobeni(r,r);
+    p=r;
+    x=x0;
+    
+    for(int k=1; k<=n; k++)
+    {
+        z=nasobeni(A,p);
+        alfa=rr/nasobeni(p,z);
+        x=soucet(x,nasobeni(alfa,p)); // nasobeni vektoru cislem
+        r=rozdil(r,nasobeni(alfa,z)); // soucet dvou vektoru
+        if (r==nulovy_vektor) {break;}
+        rr=nasobeni(r,r);
+        beta=rr/lrr;
+        lrr=rr;
+        p=soucet(p,nasobeni(beta,p));
+        
+    }
+
+    x.printed();
+    
+ 
     
     return 0;
 }
