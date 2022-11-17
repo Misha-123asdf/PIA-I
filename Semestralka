@@ -7,7 +7,7 @@ using namespace std;
 
 class Matrix
 {
-public:
+    public:
     
     map <array<int, 2>, double> newmap;
     
@@ -35,11 +35,10 @@ public:
     
 };
 
-    class Vektor
-    {
+class Vektor
+{
     
     public:
-        
     map <int, double> newmap;
 
     void set()
@@ -64,10 +63,10 @@ public:
     }
    
         
-    };
+};
     
-    Vektor nasobeni(Matrix a, Vektor b)
-    {
+Vektor nasobeni(Matrix a, Vektor b)
+{
         Vektor c;
         
         map <array<int, 2>, double>:: iterator it=a.newmap.begin();
@@ -82,12 +81,12 @@ public:
         
     
         return c;
-    }
+}
     
     
     
-    double nasobeni(Vektor a, Vektor b)
-    {
+double nasobeni(Vektor a, Vektor b)
+{
         double c=0;
         map <int, double>:: iterator it=a.newmap.begin();
         
@@ -97,10 +96,10 @@ public:
         }
         return c;
         
-    }
+}
     
-  Vektor rozdil(Vektor a, Vektor b)
-    {
+Vektor rozdil(Vektor a, Vektor b)
+{
         Vektor c;
         
         
@@ -125,28 +124,17 @@ public:
         {
     
         key=it2->first;
-            if (find(pom.begin(), pom.end(), key) != pom.end()) {
-                //cout << "Element found";
-            }
-            else {
-                //cout << "Element not found";
-                c.newmap[it2->first]=-it2->second;
-            }    
-        
-        
+            if (find(pom.begin(), pom.end(), key) != pom.end()) {}
+            else {c.newmap[it2->first]=-it2->second;}    
+    
         }    
 
         
         return c;
-    }
+}
 
 int main() {
     
-
-    
-    
-    
-
     Matrix m;
     m.set();
    // m.printed();
