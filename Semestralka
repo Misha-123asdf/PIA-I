@@ -13,12 +13,11 @@ class Matrix
     
     void set()
     {
-    newmap[{1,1}]=11;
-    newmap[{2,2}]=22;
-    newmap[{3,3}]=33;
-    newmap[{4,4}]=44;
-    newmap[{5,5}]=55;
-    newmap[{6,6}]=66;
+    newmap[{1,1}]=5;
+    newmap[{1,2}]=-3;
+    newmap[{2,1}]=-3;
+    newmap[{2,2}]=5;
+
     }
 
     void printed()
@@ -43,12 +42,18 @@ class Vektor
 
     void set()
     {
-    newmap[1]=11;
-    newmap[2]=22;
-    newmap[3]=33;
-    newmap[4]=44;
-    newmap[5]=55;
-    newmap[6]=66;
+    newmap[1]=-1;
+    newmap[2]=7;
+    }
+    void setN()
+    {
+    newmap[1]=0;
+    newmap[2]=0;
+    }
+    void setP()
+    {
+    newmap[1]=0;
+    newmap[2]=-1;
     }
 
     void printed()
@@ -66,7 +71,7 @@ class Vektor
 };
     
 Vektor nasobeni(Matrix a, Vektor b)
-{
+{  
         Vektor c;
         
         map <array<int, 2>, double>:: iterator it=a.newmap.begin();
@@ -76,10 +81,10 @@ Vektor nasobeni(Matrix a, Vektor b)
         for(int j=0; it!=a.newmap.end(); it++,j++)
         {
         pom=(it->second)*b.newmap[it->first[1]];
-        c.newmap[it->first[0]]=pom;
+        //cout<<(it->second)<<"*"<<b.newmap[it->first[1]]<<"="<<pom<<endl;
+        c.newmap[it->first[0]]+=pom;
         }    
-        
-    
+
         return c;
 }
     
@@ -188,61 +193,61 @@ Vektor soucet(Vektor a, Vektor b)
 int main() {
     
     Matrix A;
-    Vektor r,x0,p,z,x,b;
+    Vektor r,x0,p,z,x,b,null_v;
     double alfa,beta,lrr,rr;
     
-    int n=9;
-    /*
-    Matrix m;
-    m.set();
-    m.printed();
+    int n=2;
+    A.set();
     
-    Vektor v;
-    v.set();
-    v.printed();
+    x0.setP();
+    //x0.printed();
     
-    Vektor c;
-    c=nasobeni(m,v);
-    c.printed();
+    b.set();
+    //b.printed();
     
-    Vektor d;
-    d=soucet(c,v);
-    d.printed();
-    
-    double f;
-    f=nasobeni(c,v);
-    cout<<f<<endl;
-    
-    Vektor u;
-    u=nasobeni(8,d);
-    u.printed();
-    */
-    
-    
+    null_v.setN();
+    //null_v.printed();
     
   
     r=rozdil(b,nasobeni(A,x0));
+    cout<<"r---------------"<<endl;
+    r.printed();
+    
     lrr=nasobeni(r,r);
+    cout<<lrr<<endl;
+    
     p=r;
+    p.printed();
+    
     x=x0;
+    x.printed();
+    cout<<"CYKLUS----------------------------CYKLUS"<<endl;
     
     for(int k=1; k<=n; k++)
     {
         z=nasobeni(A,p);
+       /* A.printed();
+        p.printed();
+        z.printed();
+        */
         alfa=rr/nasobeni(p,z);
-        x=soucet(x,nasobeni(alfa,p)); // nasobeni vektoru cislem
-        r=rozdil(r,nasobeni(alfa,z)); // soucet dvou vektoru
-        if (r==nulovy_vektor) {break;}
+        
+        x=soucet(x,nasobeni(alfa,p)); 
+       // x.printed();
+        
+        
+        r=rozdil(r,nasobeni(alfa,z)); 
+        //if (r==null_v) {break;}
         rr=nasobeni(r,r);
         beta=rr/lrr;
         lrr=rr;
         p=soucet(p,nasobeni(beta,p));
-        
+        //x.printed();
     }
 
     x.printed();
     
- 
+    //nasobeni(A,p).printed();
     
     return 0;
 }
