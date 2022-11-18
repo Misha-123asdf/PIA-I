@@ -226,22 +226,38 @@ int main() {
     for(int k=1; k<=n; k++)
     {
         z=nasobeni(A,p);
-       /* A.printed();
-        p.printed();
-        z.printed();
-        */
-        alfa=rr/nasobeni(p,z);
+      //  A.printed();
+      //  p.printed();
+      //  z.printed();
+        
+        alfa=lrr/nasobeni(p,z);
+      //  cout<<"lrr="<<lrr<<endl;
+      //  cout<<"p*z="<<nasobeni(p,z)<<endl;
+      //  cout<<"alfa="<<alfa<<endl;
         
         x=soucet(x,nasobeni(alfa,p)); 
-       // x.printed();
-        
+      //  cout<<"x        ="<<endl;
+        //x.printed();
+       // cout<<"x        ="<<endl;
         
         r=rozdil(r,nasobeni(alfa,z)); 
+        //cout<<"r        ="<<endl;
+       // r.printed();
+       // cout<<"r        ="<<endl;
+        
+        
+        
         //if (r==null_v) {break;}
         rr=nasobeni(r,r);
+        //cout<<"rr        ="<<rr<<endl;
+        
         beta=rr/lrr;
+        //cout<<"beta="<<beta<<endl;
+        
         lrr=rr;
-        p=soucet(p,nasobeni(beta,p));
+        cout<<"lrr        ="<<lrr<<endl;
+        
+        p=soucet(r,nasobeni(beta,p));
         //x.printed();
     }
 
