@@ -1,4 +1,3 @@
-// Online C++ compiler to run C++ program online
 #include <iostream>
 #include <map>
 #include <vector>
@@ -202,69 +201,36 @@ int main() {
     double alfa,beta,lrr,rr;
     
     int n=3;
+    
     A.set();
-    
     x0.setP();
-    //x0.printed();
-    
     b.set();
-    //b.printed();
     
     null_v.setN();
-    //null_v.printed();
-    
   
     r=b-(A*x0);
-   // cout<<"r---------------"<<endl;
-   // r.printed();
-    
     lrr=r*r;
-   // cout<<lrr<<endl;
-    
     p=r;
-   // p.printed();
-    
     x=x0;
-   // x.printed();
-    //cout<<"CYKLUS----------------------------CYKLUS"<<endl;
+
     
     for(int k=1; k<=n; k++)
     {
         z=A*p;
-      //  A.printed();
-      //  p.printed();
-      //  z.printed();
         
         alfa=lrr/(p*z);
-      //  cout<<"lrr="<<lrr<<endl;
-      //  cout<<"p*z="<<nasobeni(p,z)<<endl;
-      //  cout<<"alfa="<<alfa<<endl;
-        
+
         x=x+(alfa*p); 
-      //  cout<<"x        ="<<endl;
-        //x.printed();
-       // cout<<"x        ="<<endl;
-        
+
         r=r-(alfa*z); 
-        //cout<<"r        ="<<endl;
-       // r.printed();
-       // cout<<"r        ="<<endl;
-        
-        
-        
-        //if (r==null_v) {break;}
+
         rr=r*r;
-        //cout<<"rr        ="<<rr<<endl;
         
         beta=rr/lrr;
-        //cout<<"beta="<<beta<<endl;
         
         lrr=rr;
-        //cout<<"lrr        ="<<lrr<<endl;
-        
+  
         p=r+(beta*p);
-        cout<<"x"<<k<<"        ="<<endl; 
-        x.printed();
     }
 
     x.printed();
