@@ -17,6 +17,7 @@ class Matrix
     newmap[{1,2}]=-4;
     newmap[{2,1}]=-4;
     newmap[{2,2}]=5;
+    newmap[{3,3}]=0.1;
 
     }
 
@@ -42,8 +43,10 @@ class Vektor
 
     void set()
     {
-    newmap[1]=-1;
-    newmap[2]=7;
+    newmap[1]=1;
+    newmap[2]=2;
+    newmap[3]=3;
+
     }
     void setN()
     {
@@ -52,8 +55,10 @@ class Vektor
     }
     void setP()
     {
-    newmap[1]=0;
-    newmap[2]=-1;
+    newmap[1]=110;
+    newmap[2]=-111;
+    newmap[3]=22;
+
     }
 
     void printed()
@@ -70,7 +75,7 @@ class Vektor
         
 };
     
-Vektor nasobeni(Matrix a, Vektor b)
+Vektor operator*(Matrix a, Vektor b)
 {  
         Vektor c;
         
@@ -88,7 +93,7 @@ Vektor nasobeni(Matrix a, Vektor b)
         return c;
 }
     
-double nasobeni(Vektor a, Vektor b)
+double operator*(Vektor a, Vektor b)
 {
         double c=0;
         map <int, double>:: iterator it=a.newmap.begin();
@@ -101,7 +106,7 @@ double nasobeni(Vektor a, Vektor b)
         
 }
 
-Vektor nasobeni(double a, Vektor b)
+Vektor operator*(double a, Vektor b)
 {
         Vektor c;
         
@@ -121,7 +126,7 @@ Vektor nasobeni(double a, Vektor b)
 }
 
 
-Vektor rozdil(Vektor a, Vektor b)
+Vektor operator-(Vektor a, Vektor b)
 {
         Vektor c;
         
@@ -155,7 +160,7 @@ Vektor rozdil(Vektor a, Vektor b)
         
         return c;
 }
-Vektor soucet(Vektor a, Vektor b)
+Vektor operator+(Vektor a, Vektor b)
 {
         Vektor c;
         
@@ -196,7 +201,7 @@ int main() {
     Vektor r,x0,p,z,x,b,null_v;
     double alfa,beta,lrr,rr;
     
-    int n=2;
+    int n=3;
     A.set();
     
     x0.setP();
@@ -209,11 +214,11 @@ int main() {
     //null_v.printed();
     
   
-    r=rozdil(b,nasobeni(A,x0));
+    r=b-(A*x0);
    // cout<<"r---------------"<<endl;
    // r.printed();
     
-    lrr=nasobeni(r,r);
+    lrr=r*r;
    // cout<<lrr<<endl;
     
     p=r;
@@ -225,22 +230,22 @@ int main() {
     
     for(int k=1; k<=n; k++)
     {
-        z=nasobeni(A,p);
+        z=A*p;
       //  A.printed();
       //  p.printed();
       //  z.printed();
         
-        alfa=lrr/nasobeni(p,z);
+        alfa=lrr/(p*z);
       //  cout<<"lrr="<<lrr<<endl;
       //  cout<<"p*z="<<nasobeni(p,z)<<endl;
       //  cout<<"alfa="<<alfa<<endl;
         
-        x=soucet(x,nasobeni(alfa,p)); 
+        x=x+(alfa*p); 
       //  cout<<"x        ="<<endl;
         //x.printed();
        // cout<<"x        ="<<endl;
         
-        r=rozdil(r,nasobeni(alfa,z)); 
+        r=r-(alfa*z); 
         //cout<<"r        ="<<endl;
        // r.printed();
        // cout<<"r        ="<<endl;
@@ -248,7 +253,7 @@ int main() {
         
         
         //if (r==null_v) {break;}
-        rr=nasobeni(r,r);
+        rr=r*r;
         //cout<<"rr        ="<<rr<<endl;
         
         beta=rr/lrr;
@@ -257,13 +262,14 @@ int main() {
         lrr=rr;
         //cout<<"lrr        ="<<lrr<<endl;
         
-        p=soucet(r,nasobeni(beta,p));
-        //x.printed();
+        p=r+(beta*p);
+        cout<<"x"<<k<<"        ="<<endl; 
+        x.printed();
     }
 
     x.printed();
     
-    //nasobeni(A,p).printed();
+
     
     return 0;
 }
